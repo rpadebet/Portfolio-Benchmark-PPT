@@ -42,7 +42,7 @@ knit        : slidify::knit2slides
 
 >* I can pick upto 10 stocks using the **RANDOM Algo** (*developed by my Master*)
 
->* I can invest for upto 15 years or as low as 1 year
+>* I can invest for upto 10 years or as low as 1 year
 
 >* I can only equally weight stocks the Algo picks (*It is a quirk of my IQ*)
 
