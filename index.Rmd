@@ -1,0 +1,92 @@
+---
+title       : Monkey Capital Management LLC
+subtitle    : Can an Monkey beat the S&P 500 Index
+author      : Rohit Padebettu
+job         : 
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : night      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+
+--- 
+<style>
+.title-slide {
+  background-color: #FFFFFF; /* #EDE0CF; ; #CA9F9D*/
+}
+</style>
+## Introduction
+
+>* Hi, I am a portfolio manager from Monkey Capital Management LLC.
+
+>* I have a ridiculously low IQ compared to most of you 
+    - I think it maybe because I evolved earlier than you
+
+>* But I do possess an amazing Algorithm for picking stocks
+
+>* The problem is, I can only use it **once** to pick stocks
+
+>* I can make up for that shortcoming though
+
+>* *By working as hard as you want me to*
+
+>* *For as long as you want me to*
+
+>* *My Ambition:* **I really do want to beat the S&P 500 Index!**
+
+
+
+--- bg:
+## Methodology
+
+>* I can pick upto 10 stocks using the **RANDOM Algo** (*developed by my Master*)
+
+>* I can invest for upto 15 years or as low as 1 year
+
+>* I can only equally weight stocks the Algo picks (*It is a quirk of my IQ*)
+
+>* For now I have read up on the Dow 30 stocks (*I am confident that's enough*)
+
+>* I work at 5 different speeds (*Master calls it Portfolio Rebalancing for some reason*)
+    - Yearly
+    - Quarterly
+    - Monthly
+    - Weekly
+    - Daily
+
+>* I benchmark myself against my "Lazy" Buy & Hold brother and also the "Evil" S&P500 Index
+
+
+--- bg:lightgoldenrodyellow
+## Portfolio Analytics
+I make some cool charts and tables available to you to assess my performance
+```{r,echo=F,fig.align='center',warning=FALSE}
+suppressWarnings(source('../Script.R'))
+```
+
+```{r,echo=F,fig.align ='center',fig.width=12,fig.height=6}
+charts.PerformanceSummary(plot_data,colorset=rainbow6equal,lwd=2)
+```
+
+--- bg:lightgoldenrodyellow
+## Portfolio Value
+```{r,echo=F,fig.align ='center',fig.width=12,fig.height=7}
+chartSeries(portfolio_rebal$wealthindex*100,name = "Value of Portfolio")
+```
+
+
+---
+## Performance Breakdown
+```{r,echo=F, results='asis'}
+perf_return = xts()
+perf_return$rebal<-monthlyReturn(portfolio_rebal$wealthindex,type = 'arithmetic',leading = TRUE)
+perf_return$bh<-monthlyReturn(portfolio_buyhold$wealthindex,type = 'arithmetic',leading = TRUE)
+perf_return$bmk<-monthlyReturn(benchmark_portfolio$wealthindex,type = 'arithmetic',leading = TRUE)
+names(perf_return)<-c("Rebalanced Portfolio","BuyHold Portfolio","Benchmark")
+suppressPackageStartupMessages(require(xtable))
+print(xtable(t(table.CalendarReturns(perf_return))),type='html',)
+```
+
+
+

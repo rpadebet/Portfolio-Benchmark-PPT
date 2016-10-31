@@ -1,0 +1,9 @@
+base
+zoo
+xts
+TTR
+quantmod
+PerformanceAnalytics
+plyr
+lubridate
+xtable
